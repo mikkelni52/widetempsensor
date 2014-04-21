@@ -1,7 +1,43 @@
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 int main( int argc, char *argv[])
 {
+	char *python[3];
+	int status;
+	pid_t child;
+	pid_t c;
+	python[0] = "/usr/bin/python";
+	python[1] = "getPicture.py";
+	python[2] = NULL;
+	
+	if ((child = fork()) == 0 ) {
+		
+		execvp(python[0], python);
+	
+	
+		fprintf(stderr, "Child process failed \n");
+		exit(1);
+	}
+	else {
+		if (child == (pid_t)(-1)) {
+			fprintf(stderr, "Fork failed \n");
+			exit(1);
+		}
+		else {
+			c = wait(&status);
+			//printf("Parent: child exited");
+			printf("hi \n");
+			status = 10;
+			printf("test status %d  \n", status);
+		}
+	}
+	/*
     GtkWidget *window, *image;
 
     gtk_init(&argc, &argv);
@@ -21,6 +57,7 @@ int main( int argc, char *argv[])
     g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_widget_show_all(window);
     gtk_main();
+	*/
 
     return 0;
 }
