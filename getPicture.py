@@ -16,6 +16,7 @@ SERIALNUM = 0    # start with 0, each camera should have a unique ID.
 COMMANDSEND = 0x56
 COMMANDREPLY = 0x76
 COMMANDEND = 0x00
+# hi dad i'm commiting this stuff to my personal repository
 
 CMD_GETVERSION = 0x11
 CMD_RESET = 0x26
